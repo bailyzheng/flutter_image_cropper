@@ -15,9 +15,6 @@ buildscript {
 
 rootProject.allprojects {
     repositories {
-        flatDir {
-            dirs '../../../android/app/libs'
-        }
         google()
         jcenter()
         maven { url "https://www.jitpack.io" }
@@ -36,9 +33,17 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
+
+    packagingOptions {
+        exclude 'res/values/values.xml'
+        exclude 'AndroidManifest.xml'
+        exclude 'R.txt'
+        exclude 'classes.jar'
+    }
+    
     dependencies {
 //        implementation 'com.github.yalantis:ucrop:2.2.4'
         implementation 'androidx.appcompat:appcompat:1.1.0'
-        implementation fileTree(dir: 'libs', include: ['*.aar','*.jar'])
+        implementation fileTree(dir: '../../../android/app/libs', include: ['*.aar','*.jar'])
     }
 }
